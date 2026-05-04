@@ -5,8 +5,6 @@
 
 This fork will have added DMR Tier3 elements and PDUs. It's not done yet. 
 
-Status: not added any Tier3 functionality
-
 ## Supported features
 
 ### FEC (Forward Error Correction)
