@@ -50,7 +50,7 @@ This fork will have added DMR Tier3 elements and PDUs. It's not done yet.
 | SHORT&nbsp;LC           |          ✅          | Short Link Control, namely: Activity, Null, ToDo: ControlChannelSysParms, PayloadChannelSysParms                           |
 | SLOT                    |          ✅          | Slot Type                                                                                                                  |
 | SYNC                    |          ✅          | Synchronization patterns                                                                                                   |
-| TACT                    |          ❌          | Framing and status of the Common Announcement Channel (CACH)                                                                                       |
+| TACT                    |          ❌          | Framing and status of CACH                                                                                                 |
 | Data&nbsp;Header        |          ✅          | Confirmed/Unconfirmed, Response, Defined Short Data                                                                        |
 | PI&nbsp;Header          |          ✅          | Privacy (PI) Header                                                                                                        |
 | Rate&nbsp;1&nbsp;Data   |          ✅          | Rate 1 data (confirmed and unconfirmed) and last block data (confirmed and unconfirmed)                                    |
@@ -58,6 +58,8 @@ This fork will have added DMR Tier3 elements and PDUs. It's not done yet.
 | Rate&nbsp;3/4&nbsp;Data |          ✅          | Rate 3/4 data (confirmed and unconfirmed) and last block data (confirmed and unconfirmed)                                  |
 | Full/Short Link Control |          ✅          | FLC/SLC PDUs                                                                                                               |
 | UDP/IPv4                |          ✅          | UDP/IPv4 compressed header/packet                                                                                          |
+| MBC&nbsp;Header         |          ❌          | Multi Block Control Header                                                                                                 |
+| MBC&nbsp;Continuation   |          ❌          | Multi Block Control Continuation                                                                                  |
 | Reverse&nbsp;Channel    |          ❌          | RC Signalling                                                                                                              |
 | USBD                    |          ❌          | Unified Single Block Data                                                                                                  |
 
@@ -75,7 +77,25 @@ Re-Synchronize Flag (S), Send sequence number (N(S)), SAP identifier (SAP), Supp
 Transport Format (UDT Format), UDP Port Identifier (SPID/DPID), IP Address Identifier (SAID/DAID)
 
 ToDo: RC Command, Response Delay, Broadcast Params, CDefParms, Challenge Response, Data Response, LIP Reason,
-Network Model, Protect Kind, Response Info, Service Dependant, Service Kind, 
+Network Model, Protect Kind, Response Info, Service Dependant, Service Kind, Backoff
+
+### IP Bearer Services
+
+| Name                    | Encoding / Decoding | Description                                                                                                                | 
+|-------------------------|:-------------------:|----------------------------------------------------------------------------------------------------------------------------|
+| ICMPv4                  |          ❌          | Internet Control Message Protocol v4                                                                                       |
+| ICMPv6                  |          ❌          | Internet Control Message Protocol v6                                                                                       |
+| ARP                     |          ❌          | Address Resolution Protocol                                                                                                |
+| UDP                     |          ❌          | User Datagram Protocol                                                                                                     |
+| TCP                     |          ❌          | Transmission Control Protocol                                                                                                     |
+
+### NMEA-0183 Messages
+
+| Name                    | Encoding / Decoding | Description                                                                                                                | 
+|-------------------------|:-------------------:|----------------------------------------------------------------------------------------------------------------------------|
+| GPGGA                   |          ❌          | GPS fix data and undulation                                                                                                |
+| GPRMC                   |          ❌          | GPS specific information                                                                                                   |
+| GPVTG                   |          ❌          | Track made good and ground speed                                                                                           |
 
 ### Hytera
 
