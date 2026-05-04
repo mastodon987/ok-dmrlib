@@ -1,15 +1,11 @@
-# OK-DMR Lib
+# OK-DMR Lib (Fork)
 
-[![.github/workflows/sanity.yml](https://img.shields.io/github/actions/workflow/status/OK-DMR/ok-dmrlib/sanity.yml?style=flat-square&branch=master)](https://github.com/OK-DMR/ok-dmrlib/actions)
 [![Code Style: Python Black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 [![License](https://img.shields.io/github/license/OK-DMR/ok-dmrlib?style=flat-square)](https://github.com/OK-DMR/ok-dmrlib/blob/master/LICENSE)
-[![Last released version](https://img.shields.io/pypi/v/ok-dmrlib?style=flat-square)](https://pypi.org/project/ok-dmrlib/)
-[![PyPI downloads](https://img.shields.io/pypi/dd/ok-dmrlib?style=flat-square)](https://libraries.io/pypi/ok-dmrlib)
-[![Python versions](https://img.shields.io/pypi/pyversions/ok-dmrlib?style=flat-square)](https://pypi.org/project/ok-dmrlib/)
-[![Wheel](https://img.shields.io/pypi/wheel/ok-dmrlib?style=flat-square)](https://pypi.org/project/ok-dmrlib/#files)
-[![Codecov](https://img.shields.io/codecov/c/github/ok-dmr/ok-dmrlib?style=flat-square)](https://app.codecov.io/gh/OK-DMR/ok-dmrlib)
 
-This package provides way to parse and assemble various DMR ETSI protocols and functions, in pure Python implementation
+This fork will have added DMR Tier3 elements and PDUs. It's not done yet. 
+
+Status: not added any Tier3 functionality
 
 ## Supported features
 
@@ -20,9 +16,11 @@ This package provides way to parse and assemble various DMR ETSI protocols and f
 | Hamming (7,4,3)                                     |    ✅     |            ✅            |
 | Hamming (13,9,3)                                    |    ✅     |            ✅            |
 | Hamming (15,11,3)                                   |    ✅     |            ✅            |
-| Hamming (16,11,3)                                   |    ✅     |            ✅            |
+| Hamming (16,11,4)                                   |    ✅     |            ✅            |
 | Hamming (17,12,3)                                   |    ✅     |            ✅            |
 | Golay (20,8,7)                                      |    ✅     |            ✅            |
+| Golay (23,12,7)                                     |    ❌     |            ❌            |
+| Golay (24,12,8)                                     |    ❌     |            ❌            |
 | Quadratic Residue (16,7,6)                          |    ✅     |            ✅            |
 | Reed-Solomon (12,9,4)                               |    ✅     |            ✅            |
 | Rate 3/4 Trellis                                    |    ✅     |            ✅            |
@@ -35,7 +33,9 @@ This package provides way to parse and assemble various DMR ETSI protocols and f
 
 | Name                  | Generate | Verify |
 |-----------------------|:--------:|:------:|
+| CRC-4                 |    ❌     |   ❌    |
 | 5-bit checksum        |    ✅     |   ✅    |
+| CRC-7                 |    ❌     |   ❌    |
 | CRC-8 (8-bit CRC)     |    ✅     |   ✅    |
 | CRC-9                 |    ✅     |   ✅    |
 | CRC-CCIT (CRC16-CCIT) |    ✅     |   ✅    |
@@ -45,19 +45,23 @@ This package provides way to parse and assemble various DMR ETSI protocols and f
 
 | Name                    | Encoding / Decoding | Description                                                                                                                | 
 |-------------------------|:-------------------:|----------------------------------------------------------------------------------------------------------------------------|
-| CSBK                    |          ✅          | Control Signalling Block, namely: BS Outbound Activation, Unit-Unit Request/Answer, Negative ACK, Preamble, Channel Timing |
+| CACH                    |          ❌          | Common Announcement Channel (CACH)                                                                                         |
+| CSBK                    |          ✅          | Control Signalling Block                                                                                                   |
 | EMB                     |          ✅          | Embedded Signalling                                                                                                        |
 | FULL&nbsp;LC            |          ✅          | Full Link Control, namely: Group Voice, Unit-Unit, Talker Alias (header + blocks1,2,3), GPSInfo, Terminator with LC        |
-| SHORT&nbsp;LC           |          ✅          | Short Link Control, namely: Activity, Null                                                                                 |
+| SHORT&nbsp;LC           |          ✅          | Short Link Control, namely: Activity, Null, ToDo: ControlChannelSysParms, PayloadChannelSysParms                           |
 | SLOT                    |          ✅          | Slot Type                                                                                                                  |
 | SYNC                    |          ✅          | Synchronization patterns                                                                                                   |
+| TACT                    |          ❌          | Framing and status of the Common Announcement Channel (CACH)                                                                                       |
 | Data&nbsp;Header        |          ✅          | Confirmed/Unconfirmed, Response, Defined Short Data                                                                        |
-| PI&nbsp;Header          |          ✅          | Privacy (PI) Header, without further understanding of transported data                                                     |
+| PI&nbsp;Header          |          ✅          | Privacy (PI) Header                                                                                                        |
 | Rate&nbsp;1&nbsp;Data   |          ✅          | Rate 1 data (confirmed and unconfirmed) and last block data (confirmed and unconfirmed)                                    |
 | Rate&nbsp;1/2&nbsp;Data |          ✅          | Rate 1/2 data (confirmed and unconfirmed) and last block data (confirmed and unconfirmed)                                  |
 | Rate&nbsp;3/4&nbsp;Data |          ✅          | Rate 3/4 data (confirmed and unconfirmed) and last block data (confirmed and unconfirmed)                                  |
 | Full/Short Link Control |          ✅          | FLC/SLC PDUs                                                                                                               |
 | UDP/IPv4                |          ✅          | UDP/IPv4 compressed header/packet                                                                                          |
+| Reverse&nbsp;Channel    |          ❌          | RC Signalling                                                                                                              |
+| USBD                    |          ❌          | Unified Single Block Data                                                                                                  |
 
 ### ETSI Information Elements
 
@@ -71,6 +75,9 @@ Dynamic Identifier), Position Error, Reason Code, Service Options, Talker Alias 
 Selective Automatic Repeat reQuest (SARQ),
 Re-Synchronize Flag (S), Send sequence number (N(S)), SAP identifier (SAP), Supplementary Flag (SF), Unified Data
 Transport Format (UDT Format), UDP Port Identifier (SPID/DPID), IP Address Identifier (SAID/DAID)
+
+ToDo: RC Command, Response Delay, Broadcast Params, CDefParms, Challenge Response, Data Response, LIP Reason,
+Network Model, Protect Kind, Response Info, Service Dependant, Service Kind, 
 
 ### Hytera
 
@@ -109,6 +116,7 @@ Transport Format (UDT Format), UDP Port Identifier (SPID/DPID), IP Address Ident
 - dmrlib-dmr-voiceburst - Describe full Tier-II burst (33 bytes) - assumes the burst type is Vocoder
 - dmrlib-dmr-header - Describe DMR Data Header
 - dmrlib-dmr-csbk - Describe CSBK PDU
+- dmrlib-short-lc - Describe Short LC (Link Control) PDU - ToDo
 - dmrlib-full-lc - Describe Full LC (Link Control) PDU
 - dmrlib-dmr-ipudp - Describe DMR UDP/IPv4 Compressed data (header + user payload)
 - dmrlib-dsd-fme - Describes content of symbol dump from DSD-FME+
