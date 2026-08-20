@@ -5,8 +5,8 @@
 version: 2
 
 # Set the OS, Python version, and other tools you might need
-os: multiplatform
 build:
+  os: multiplatform
   tools:
     python: "3.14t"
 
